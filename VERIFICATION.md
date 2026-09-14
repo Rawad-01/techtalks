@@ -1,6 +1,6 @@
 # Submission verification
 
-Verified locally and on the hosted public deployment on September 14, 2026. This report distinguishes local authenticated tests from production public checks; external OAuth sign-in remains unverified.
+Verified locally and on the hosted public deployment on September 14, 2026. This report distinguishes local authenticated tests, production public checks, and owner-reported production Google sign-in. GitHub sign-in and authenticated production write flows remain unverified.
 
 ## Completed checks
 
@@ -21,7 +21,7 @@ Verified locally and on the hosted public deployment on September 14, 2026. This
 | Authenticated submission screenshot       | Pending real account capture                                                |
 | Hosted deployment                         | Public pages and Atlas reads verified at https://techtalks-sigma.vercel.app |
 
-Record counts are a dated observation, not fixed UI counts. The owner confirmed successful local sign-in after Google configuration; that confirmation does not prove either provider on a future deployment.
+Record counts are a dated observation, not fixed UI counts. The owner first confirmed local sign-in and later reported success after following the production Google sign-in test. The agent has not signed into either provider in production.
 
 ## Audit coverage
 
@@ -37,6 +37,7 @@ The build confirms 60-second ISR for Home, Blogs, and Communities; on-demand gen
 - Auth.js host trust honors the configured `NEXTAUTH_URL` as well as `AUTH_URL`. The final production integration run uses the documented `NEXTAUTH_*` variables without the test's former extra URL/trust aliases.
 - Added actual sign-out testing: navbar updates, private API returns 401, and Profile redirects after logout.
 - Expanded generated-file/credential exclusions and added submission documents plus reproducible screenshot capture.
+- The Profile capture now waits for the authenticated Profile heading. A streamed redirect can briefly visit `/profile` before returning an unsigned browser to Login; one automated capture attempt reached that transient URL but `/api/me` returned 401, so no image was accepted. Capture in a regular signed-in browser remains the documented fallback.
 
 ## Integration evidence
 
@@ -59,13 +60,13 @@ Authenticated automated tests use signed Auth.js cookies created only by the tes
 
 There was no Git repository or history at the start of submission preparation. A new local `main` repository was initialized; source and public browser bundles were scanned before staging. The final local commit includes source, safe configuration, documentation, and public screenshots. No existing history was rewritten or claimed to be scrubbed.
 
-Real secrets remain only in ignored local environment files. Credentials previously shared in chat/screenshots must still be rotated before deployment. A clean repository does not revoke an exposed credential.
+Real secrets remain outside tracked source. Credentials previously shared in chat/screenshots must be rotated if they are still active. A clean repository or working deployment does not revoke an exposed credential; rotation of every earlier credential has not been independently verified.
 
 ## Remaining external evidence
 
-- Teacher access to https://github.com/Rawad-01/techtalks; commit `d1f4937` was pushed and verified against the remote.
-- Correct the production canonical origin and finish production OAuth settings, then verify authenticated persistence on the deployed site.
-- Independent Google and GitHub provider round trips on the deployed origin; use separate emails when testing because cross-provider linking is intentionally disabled.
+- The GitHub repository, screenshots folder, and live website each returned HTTP 200 to anonymous visitors. The repository is publicly accessible; the prepared commit and subsequent submission documentation were pushed to the remote.
+- Verify authenticated persistence on the deployed site: profile editing, publishing, community membership, and logout.
+- Test GitHub sign-in on the deployed origin; use a separate email if the Google identity already uses the same email because cross-provider linking is intentionally disabled.
 - A Profile screenshot from a real sign-in, with private information kept out of the capture.
 - Final links, screenshots, and optional recorded demo reviewed before submission.
 
@@ -79,6 +80,7 @@ At https://techtalks-sigma.vercel.app on September 14, 2026:
 - The live blog and community APIs returned HTTP 200 with 8 articles and 6 communities, confirming production database reads.
 - The anonymous session endpoint returned `null`; the private profile API returned HTTP 401.
 - A fresh anonymous Chrome context followed the Profile page's streamed redirect to Login. Next.js can return HTTP 200 while delivering this redirect in the page stream.
-- Both login buttons were enabled, but `/api/auth/providers` still advertised `http://localhost:3000` callback URLs. Set the production `NEXTAUTH_URL` to `https://techtalks-sigma.vercel.app`, configure matching provider redirects, and redeploy before testing sign-in.
+- The first check found enabled login buttons with localhost callback URLs. After configuration and redeployment, `/api/auth/providers` was rechecked and now advertises `https://techtalks-sigma.vercel.app/api/auth/callback/google` and `https://techtalks-sigma.vercel.app/api/auth/callback/github`.
+- The owner reported successful Google sign-in after the production setup instructions. This is manual owner confirmation, not an agent-executed OAuth test. GitHub's reported callback URL alone does not establish that its external OAuth app accepts the redirect or that its secret is valid.
 
-These checks did not log into an account or change production records. They do not establish either external OAuth round trip, authenticated production writes, or testing on another physical device.
+The agent's checks did not log into an account or change production records. Authenticated production writes, a GitHub OAuth round trip, and testing on another physical device still need owner verification.

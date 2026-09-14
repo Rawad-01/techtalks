@@ -31,7 +31,11 @@ async function run() {
       );
       await page.goto(`${base}/login?callbackUrl=%2Fprofile`);
       await page.waitForURL(`${base}/profile`, { timeout: 300000 });
-      await expect(page.locator("main h1")).toBeVisible();
+      // A streamed redirect can briefly visit /profile before sending an
+      // unauthenticated browser back to Login. Wait for the real Profile UI.
+      await expect(page.locator(".profile-header h1")).toBeVisible({
+        timeout: 30000,
+      });
       const me = await context.request.get(`${base}/api/me`);
       assert.equal(me.status(), 200, "A real signed-in session is required.");
       await page.evaluate(() => document.fonts.ready);

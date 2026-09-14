@@ -1,6 +1,6 @@
 # TechTalks Capstone Submission Checklist
 
-Checked items have evidence described in [VERIFICATION.md](VERIFICATION.md). Automated authenticated tests use isolated test sessions and MongoDB; they do not prove a hosted OAuth round trip. Public production reads are verified; provider and authenticated production checks remain unchecked until performed.
+Checked items have evidence described in [VERIFICATION.md](VERIFICATION.md). Automated authenticated tests use isolated test sessions and MongoDB; they do not prove a hosted OAuth round trip. Public production reads and callback URLs are verified. Owner-reported production sign-in is labeled separately; remaining production checks stay unchecked.
 
 ## Application
 
@@ -10,7 +10,7 @@ Checked items have evidence described in [VERIFICATION.md](VERIFICATION.md). Aut
 - [x] Communities page works
 - [x] Community details work
 - [x] Login page and app session handling work
-- [ ] Google OAuth independently verified on the final deployment
+- [x] Google OAuth works on the final deployment (owner-reported successful sign-in)
 - [ ] GitHub OAuth independently verified on the final deployment
 - [x] Profile is protected
 - [x] Profile editing works
@@ -19,7 +19,7 @@ Checked items have evidence described in [VERIFICATION.md](VERIFICATION.md). Aut
 - [x] Leave community works
 - [x] Logout revokes the browser session and restores protection
 
-The owner reported successful local sign-in after configuration. Both provider buttons are configured. Test the providers separately in production, using different emails where needed.
+The owner reported successful sign-in after following the deployed Google login test. Both provider buttons are configured, and both callback URLs use the production origin. GitHub sign-in still needs a separate test, using a different email if the Google account already uses the same email.
 
 ## Database
 
@@ -43,7 +43,7 @@ The owner reported successful local sign-in after configuration. Both provider b
 ## GitHub
 
 - [x] Repository pushed
-- [ ] Repository visibility/access configured for the teacher
+- [x] Repository and screenshots are publicly accessible without signing in
 - [x] Clean project structure and generated-file exclusions
 - [x] README documentation prepared
 - [x] README Live Demo placeholder replaced with verified URL
@@ -55,7 +55,7 @@ The owner reported successful local sign-in after configuration. Both provider b
 - [x] Application deployed
 - [ ] Production environment variables configured
 - [x] MongoDB production connection works
-- [ ] Google OAuth production origin/callback configured
+- [x] Google OAuth production origin/callback configured (correct callback observed; owner confirms login)
 - [ ] GitHub OAuth production callback configured
 - [ ] Live URL tested in a private browser and on another device
 - [ ] Profile edit, article publish, join/leave, and logout verified on the live site
@@ -76,5 +76,6 @@ The owner reported successful local sign-in after configuration. Both provider b
 - [x] Manual testing document
 - [x] GitHub and Vercel deployment instructions
 - [ ] Demo video recorded if used
+- [x] Teacher submission message drafted in [docs/TEACHER_MESSAGE.md](docs/TEACHER_MESSAGE.md)
 
 Follow [DEPLOYMENT.md](docs/DEPLOYMENT.md) for the remaining hosting steps and [screenshot instructions](docs/screenshots/README.md) for the real profile capture. Do not use integration-test profile images as portfolio evidence of OAuth login.

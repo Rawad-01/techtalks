@@ -6,7 +6,7 @@ TechTalks is a full-stack developer community platform where developers can publ
 
 [Open TechTalks](https://techtalks-sigma.vercel.app)
 
-Public pages and the production MongoDB connection are verified. Production sign-in still needs the canonical URL corrected and both OAuth providers tested. Follow the [GitHub and Vercel guide](docs/DEPLOYMENT.md) and [submission checklist](SUBMISSION_CHECKLIST.md).
+Public pages and the production MongoDB connection are verified. Both providers advertise the correct production callback URLs, and the owner reports successful Google sign-in. GitHub sign-in and authenticated production write flows still need confirmation. Follow the [GitHub and Vercel guide](docs/DEPLOYMENT.md) and [submission checklist](SUBMISSION_CHECKLIST.md).
 
 ## Screenshots
 

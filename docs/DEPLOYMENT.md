@@ -2,7 +2,7 @@
 
 The repository is https://github.com/Rawad-01/techtalks and the production site is https://techtalks-sigma.vercel.app. The prepared commit has been pushed; public pages and production database reads are verified. Local development has its own credentials; configure production secrets directly in the hosting dashboard.
 
-The first deployment's provider endpoint still reports localhost callback URLs. Set the production `NEXTAUTH_URL` to `https://techtalks-sigma.vercel.app`. Configure Google with origin `https://techtalks-sigma.vercel.app` and redirect `https://techtalks-sigma.vercel.app/api/auth/callback/google`; configure GitHub with homepage `https://techtalks-sigma.vercel.app` and callback `https://techtalks-sigma.vercel.app/api/auth/callback/github`. Redeploy after saving production variables. Both provider round trips and authenticated production writes remain to be verified.
+The production callback URLs have been corrected and verified, and the owner reports successful Google sign-in. The production `NEXTAUTH_URL` is `https://techtalks-sigma.vercel.app`. Google uses origin `https://techtalks-sigma.vercel.app` and redirect `https://techtalks-sigma.vercel.app/api/auth/callback/google`; GitHub uses homepage `https://techtalks-sigma.vercel.app` and callback `https://techtalks-sigma.vercel.app/api/auth/callback/github`. Redeploy after any future production variable changes. A GitHub sign-in test and authenticated production writes remain to be verified.
 
 ## 1. Push the prepared Git repository
 
