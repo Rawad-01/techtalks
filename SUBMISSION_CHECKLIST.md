@@ -1,6 +1,6 @@
 # TechTalks Capstone Submission Checklist
 
-Checked items have local evidence. Automated authenticated tests use isolated test sessions and MongoDB; they do not prove a hosted OAuth round trip. Production and provider checks remain unchecked until performed. See [VERIFICATION.md](VERIFICATION.md).
+Checked items have evidence described in [VERIFICATION.md](VERIFICATION.md). Automated authenticated tests use isolated test sessions and MongoDB; they do not prove a hosted OAuth round trip. Public production reads are verified; provider and authenticated production checks remain unchecked until performed.
 
 ## Application
 
@@ -24,7 +24,7 @@ The owner reported successful local sign-in after configuration. Both provider b
 ## Database
 
 - [x] MongoDB Atlas connected locally
-- [ ] MongoDB Atlas connected in production
+- [x] MongoDB Atlas connected in production
 - [x] User records persist in local Atlas; profile updates tested in isolated MongoDB
 - [x] Blog records persist in local Atlas and isolated tests
 - [x] Community membership persistence verified in isolated tests
@@ -42,19 +42,19 @@ The owner reported successful local sign-in after configuration. Both provider b
 
 ## GitHub
 
-- [ ] Repository pushed
+- [x] Repository pushed
 - [ ] Repository visibility/access configured for the teacher
 - [x] Clean project structure and generated-file exclusions
 - [x] README documentation prepared
-- [ ] README Live Demo placeholder replaced with verified URL
+- [x] README Live Demo placeholder replaced with verified URL
 - [x] Private `.env` files not committed
 - [x] Final build passes
 
 ## Deployment
 
-- [ ] Application deployed
+- [x] Application deployed
 - [ ] Production environment variables configured
-- [ ] MongoDB production connection works
+- [x] MongoDB production connection works
 - [ ] Google OAuth production origin/callback configured
 - [ ] GitHub OAuth production callback configured
 - [ ] Live URL tested in a private browser and on another device
@@ -62,8 +62,8 @@ The owner reported successful local sign-in after configuration. Both provider b
 
 ## Submission Materials
 
-- [ ] GitHub repository URL
-- [ ] Live deployment URL
+- [x] GitHub repository URL: https://github.com/Rawad-01/techtalks
+- [x] Live deployment URL: https://techtalks-sigma.vercel.app
 - [x] README
 - [x] Homepage screenshot
 - [x] Login screenshot

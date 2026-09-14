@@ -4,9 +4,9 @@ TechTalks is a full-stack developer community platform where developers can publ
 
 ## Live Demo
 
-[Add deployed application URL]
+[Open TechTalks](https://techtalks-sigma.vercel.app)
 
-Deployment is pending. Follow the [GitHub and Vercel guide](docs/DEPLOYMENT.md) and [submission checklist](SUBMISSION_CHECKLIST.md).
+Public pages and the production MongoDB connection are verified. Production sign-in still needs the canonical URL corrected and both OAuth providers tested. Follow the [GitHub and Vercel guide](docs/DEPLOYMENT.md) and [submission checklist](SUBMISSION_CHECKLIST.md).
 
 ## Screenshots
 
@@ -127,10 +127,10 @@ Auth.js also recognizes `AUTH_SECRET` and `AUTH_URL`; use the documented `NEXTAU
 
 ## Getting Started
 
-Use Node.js 24 and npm. Replace the repository placeholder with the real URL after publishing:
+Use Node.js 24 and npm:
 
 ```sh
-git clone <repository-url> techtalks
+git clone https://github.com/Rawad-01/techtalks.git techtalks
 cd techtalks
 npm ci
 ```
@@ -230,7 +230,7 @@ The [deployment guide](docs/DEPLOYMENT.md) provides exact steps. This applicatio
 
 ## Known Limitations
 
-- The hosted URL, production Atlas access, and production OAuth round trips require deployment verification.
+- Public production pages and Atlas reads are verified; production OAuth configuration and authenticated write flows still require verification.
 - Auth.js v5 is a beta dependency.
 - Discovery queries up to 100 records and filters in the browser; larger datasets need server pagination/search.
 - Embedded community membership arrays suit capstone scale rather than very large communities.

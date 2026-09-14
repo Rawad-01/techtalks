@@ -1,25 +1,25 @@
 # Submission verification
 
-Verified locally on September 14, 2026. This report distinguishes the production build running locally from an actual hosted deployment.
+Verified locally and on the hosted public deployment on September 14, 2026. This report distinguishes local authenticated tests from production public checks; external OAuth sign-in remains unverified.
 
 ## Completed checks
 
-| Check                                     | Result                                                                 |
-| ----------------------------------------- | ---------------------------------------------------------------------- |
-| ESLint                                    | Passed                                                                 |
-| Strict TypeScript                         | Passed                                                                 |
-| Production build                          | Passed with Next.js 16.3.5 and configured Atlas data                   |
-| Validation and redirect tests             | 6 passed                                                               |
-| Production-server integration groups      | 10 passed                                                              |
-| Production dependency audit               | 0 known vulnerabilities from `npm audit --omit=dev`                    |
-| Source and browser-bundle credential scan | No matches for configured secrets or common credential patterns        |
-| Environment template                      | Names only; included in Git                                            |
-| Private environments and generated output | Excluded by Git ignore rules                                           |
-| Local Atlas read verification             | Connected; 5 users, 8 blog records, 6 communities at verification time |
-| Existing real OAuth identities in Atlas   | 1 Google identity; no GitHub identity yet                              |
-| Public submission screenshots             | 6 real application captures at a 1440 × 1000 desktop viewport          |
-| Authenticated submission screenshot       | Pending real account capture                                           |
-| Hosted deployment                         | Pending; no actual URL or remote was available                         |
+| Check                                     | Result                                                                      |
+| ----------------------------------------- | --------------------------------------------------------------------------- |
+| ESLint                                    | Passed                                                                      |
+| Strict TypeScript                         | Passed                                                                      |
+| Production build                          | Passed with Next.js 16.3.5 and configured Atlas data                        |
+| Validation and redirect tests             | 6 passed                                                                    |
+| Production-server integration groups      | 10 passed                                                                   |
+| Production dependency audit               | 0 known vulnerabilities from `npm audit --omit=dev`                         |
+| Source and browser-bundle credential scan | No matches for configured secrets or common credential patterns             |
+| Environment template                      | Names only; included in Git                                                 |
+| Private environments and generated output | Excluded by Git ignore rules                                                |
+| Local Atlas read verification             | Connected; 5 users, 8 blog records, 6 communities at verification time      |
+| Existing real OAuth identities in Atlas   | 1 Google identity; no GitHub identity yet                                   |
+| Public submission screenshots             | 6 real application captures at a 1440 × 1000 desktop viewport               |
+| Authenticated submission screenshot       | Pending real account capture                                                |
+| Hosted deployment                         | Public pages and Atlas reads verified at https://techtalks-sigma.vercel.app |
 
 Record counts are a dated observation, not fixed UI counts. The owner confirmed successful local sign-in after Google configuration; that confirmation does not prove either provider on a future deployment.
 
@@ -63,10 +63,22 @@ Real secrets remain only in ignored local environment files. Credentials previou
 
 ## Remaining external evidence
 
-- Actual GitHub repository URL and push/access verification.
-- Vercel production URL, production variables, Atlas network access, and deployed persistence checks.
+- Teacher access to https://github.com/Rawad-01/techtalks; commit `d1f4937` was pushed and verified against the remote.
+- Correct the production canonical origin and finish production OAuth settings, then verify authenticated persistence on the deployed site.
 - Independent Google and GitHub provider round trips on the deployed origin; use separate emails when testing because cross-provider linking is intentionally disabled.
 - A Profile screenshot from a real sign-in, with private information kept out of the capture.
 - Final links, screenshots, and optional recorded demo reviewed before submission.
 
 Follow [DEPLOYMENT.md](docs/DEPLOYMENT.md), [MANUAL_TESTING.md](docs/MANUAL_TESTING.md), and [SUBMISSION_CHECKLIST.md](SUBMISSION_CHECKLIST.md). Machine-readable test/audit reports and diagnostics remain in ignored `.artifacts/`.
+
+## Hosted public verification
+
+At https://techtalks-sigma.vercel.app on September 14, 2026:
+
+- Home, Blogs, Communities, Login, an actual article, and a community detail returned HTTP 200.
+- The live blog and community APIs returned HTTP 200 with 8 articles and 6 communities, confirming production database reads.
+- The anonymous session endpoint returned `null`; the private profile API returned HTTP 401.
+- A fresh anonymous Chrome context followed the Profile page's streamed redirect to Login. Next.js can return HTTP 200 while delivering this redirect in the page stream.
+- Both login buttons were enabled, but `/api/auth/providers` still advertised `http://localhost:3000` callback URLs. Set the production `NEXTAUTH_URL` to `https://techtalks-sigma.vercel.app`, configure matching provider redirects, and redeploy before testing sign-in.
+
+These checks did not log into an account or change production records. They do not establish either external OAuth round trip, authenticated production writes, or testing on another physical device.
