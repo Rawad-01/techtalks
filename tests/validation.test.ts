@@ -7,7 +7,7 @@ import {
   objectIdSchema,
   profileSchema,
 } from "../lib/validations";
-import { safeRedirect, slugify } from "../lib/utils";
+import { resolveAuthRedirect, safeRedirect, slugify } from "../lib/utils";
 const validBlog = {
   title: "A useful technical story",
   slug: "a-useful-technical-story",
@@ -83,4 +83,28 @@ test("redirects stay local and don't loop through authentication", () => {
     "/communities/react?from=login",
   );
   assert.equal(slugify("A Better React API!"), "a-better-react-api");
+});
+
+test("OAuth account conflicts reach Login with the error intact", () => {
+  const base = "https://techtalks.example";
+  const conflict = "/login?error=OAuthAccountNotLinked";
+  assert.equal(resolveAuthRedirect(conflict, base), `${base}${conflict}`);
+  // The same string must not become an allowed post-login callback loop.
+  assert.equal(safeRedirect(conflict), "/profile");
+  assert.equal(
+    resolveAuthRedirect("/blogs?tag=react", base),
+    `${base}/blogs?tag=react`,
+  );
+  assert.equal(resolveAuthRedirect(`${base}/profile`, base), `${base}/profile`);
+  for (const url of [
+    "/login",
+    "/api/auth/signin",
+    `${conflict}&callbackUrl=https://evil.example`,
+    "https://evil.example/login?error=OAuthAccountNotLinked",
+    "//evil.example",
+    "/\\evil.example",
+    "javascript:alert(1)",
+  ]) {
+    assert.equal(resolveAuthRedirect(url, base), `${base}/profile`);
+  }
 });

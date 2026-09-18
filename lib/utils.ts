@@ -48,3 +48,15 @@ export function safeRedirect(value: unknown, fallback = "/profile") {
     return fallback;
   }
 }
+
+export function resolveAuthRedirect(url: string, baseUrl: string) {
+  // This is an internal sign-in failure destination, not a user callback URL.
+  if (url === "/login?error=OAuthAccountNotLinked") return `${baseUrl}${url}`;
+  if (url.startsWith("/")) return `${baseUrl}${safeRedirect(url)}`;
+  try {
+    if (new URL(url).origin === baseUrl) return url;
+  } catch {
+    /* Fall back to the profile. */
+  }
+  return `${baseUrl}/profile`;
+}

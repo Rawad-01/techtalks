@@ -11,6 +11,7 @@ import { seedDatabase } from "./seed";
 import { Blog } from "../models/Blog";
 import { Community } from "../models/Community";
 import { User } from "../models/User";
+import { resolveAuthRedirect } from "../lib/utils";
 import {
   createBlog,
   updateBlog,
@@ -335,8 +336,15 @@ async function run() {
     path: path.join(artifacts, "login-desktop.png"),
     fullPage: true,
   });
+  await page.goto(
+    resolveAuthRedirect("/login?error=OAuthAccountNotLinked", base),
+  );
+  await expect(page).toHaveURL(/\/login\?error=OAuthAccountNotLinked$/);
+  await expect(page.getByRole("main").getByRole("alert")).toContainText(
+    "Please use the provider you originally signed in with.",
+  );
   passed(
-    "Public page navigation, article reading, search, login routing, and no automatic login UI",
+    "Public navigation, login routing, visible OAuth account conflicts, and no automatic login UI",
   );
 
   // Test-only signed Auth.js JWT exercises the actual session verifier without adding a login bypass to the application.

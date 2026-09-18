@@ -4,7 +4,7 @@ import Google from "next-auth/providers/google";
 import GitHub from "next-auth/providers/github";
 import { connectDB } from "@/lib/db";
 import { User } from "@/models/User";
-import { safeRedirect } from "@/lib/utils";
+import { resolveAuthRedirect } from "@/lib/utils";
 
 export const authConfigured = () =>
   Boolean(process.env.NEXTAUTH_SECRET || process.env.AUTH_SECRET);
@@ -101,13 +101,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       return session;
     },
     async redirect({ url, baseUrl }) {
-      if (url.startsWith("/")) return `${baseUrl}${safeRedirect(url)}`;
-      try {
-        if (new URL(url).origin === baseUrl) return url;
-      } catch {
-        /* Fall back to the profile. */
-      }
-      return `${baseUrl}/profile`;
+      return resolveAuthRedirect(url, baseUrl);
     },
   },
   logger: {

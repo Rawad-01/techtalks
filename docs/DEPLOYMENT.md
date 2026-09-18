@@ -97,6 +97,8 @@ Save its client ID and secret in Vercel. Keeping local and production OAuth apps
 
 ## 7. Redeploy and verify
 
+If GitHub returns to Login with an account-conflict message, the email is already registered with another provider. Use the original provider or a GitHub account with a different email. TechTalks does not automatically link provider identities by email. The authentication redirect preserves this message instead of silently returning to Login.
+
 Redeploy after changing environment variables. Confirm `NEXTAUTH_URL`, Google settings, and GitHub settings all use the same actual HTTPS origin.
 
 In a private browser, test Home, Blogs, article, Communities, and community detail. Test Google and GitHub separately, using different emails if necessary because this app intentionally prevents cross-provider account linking.

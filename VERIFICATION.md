@@ -9,7 +9,7 @@ Verified locally and on the hosted public deployment on September 14, 2026. This
 | ESLint                                    | Passed                                                                      |
 | Strict TypeScript                         | Passed                                                                      |
 | Production build                          | Passed with Next.js 16.3.5 and configured Atlas data                        |
-| Validation and redirect tests             | 6 passed                                                                    |
+| Validation and redirect tests             | 7 passed (including the September 19 OAuth redirect regression)             |
 | Production-server integration groups      | 10 passed                                                                   |
 | Production dependency audit               | 0 known vulnerabilities from `npm audit --omit=dev`                         |
 | Source and browser-bundle credential scan | No matches for configured secrets or common credential patterns             |
@@ -48,13 +48,19 @@ The suite uses an isolated real MongoDB 7.0.24 process, a production Next.js ser
 3. Services enforce authorship and unique slugs.
 4. Every protected API rejects logged-out requests with 401.
 5. Invalid input, draft privacy, private-field filtering, origins, and non-author edits are checked through HTTP.
-6. Browser navigation covers public pages, articles, search, protected redirects, and a homepage without automatic login UI.
+6. Browser navigation covers public pages, articles, search, protected redirects, a visible OAuth account-conflict message, and a homepage without automatic login UI.
 7. Real form actions persist profile edits, articles, communities, joins, and leaves; duplicate-slug feedback preserves entered values.
 8. Editing, private drafts, republishing, cache invalidation, and confirmed deletion work.
 9. The real sign-out action clears the test session and restores route/API protection.
 10. Mobile/tablet pages at 390px and 768px, menu navigation, missing states/noindex, and absence of browser runtime errors pass.
 
 Authenticated automated tests use signed Auth.js cookies created only by the test runner. They exercise the actual session verifier but do not execute external OAuth consent. There is no application login bypass. Their profile screenshots remain ignored test artifacts and are not used in the README.
+
+## September 19 OAuth redirect regression
+
+The internal `/login?error=OAuthAccountNotLinked` destination was incorrectly processed as a post-login callback and replaced with `/profile`. A logged-out browser then returned to Login without the error. The Auth.js redirect callback now preserves this one internal failure destination while user-supplied login callbacks remain restricted. Existing protections against linking accounts solely by email are unchanged.
+
+Lint, TypeScript, the production build, 7 unit tests, and all 10 isolated integration groups passed after the fix. Regression coverage checks both redirect safety and the visible error in the rendered Login page. These tests do not authorize a real GitHub account; a full hosted GitHub sign-in remains a manual check.
 
 ## Git and credential scope
 
