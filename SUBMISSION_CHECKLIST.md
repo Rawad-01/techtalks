@@ -71,11 +71,11 @@ The owner reported successful production sign-in with both Google and GitHub. Bo
 - [x] Blog details screenshot
 - [x] Communities screenshot
 - [x] Community details screenshot
-- [ ] Real authenticated Profile screenshot
+- [x] Real authenticated Profile screenshot (owner capture; email redacted and reviewed)
 - [x] Demo script
 - [x] Manual testing document
 - [x] GitHub and Vercel deployment instructions
 - [ ] Demo video recorded if used
 - [x] Teacher submission message drafted in [docs/TEACHER_MESSAGE.md](docs/TEACHER_MESSAGE.md)
 
-Follow [DEPLOYMENT.md](docs/DEPLOYMENT.md) for the remaining hosting steps and [screenshot instructions](docs/screenshots/README.md) for the real profile capture. Do not use integration-test profile images as portfolio evidence of OAuth login.
+Follow [MANUAL_TESTING.md](docs/MANUAL_TESTING.md) for the remaining production workflow checks. All seven submission screenshots are present; [screenshot instructions](docs/screenshots/README.md) explain how to update them. Do not use integration-test profile images as portfolio evidence of OAuth login.

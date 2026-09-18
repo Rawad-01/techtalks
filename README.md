@@ -12,17 +12,17 @@ Public pages and the production MongoDB connection are verified. Both providers 
 
 ![TechTalks homepage](docs/screenshots/home.png)
 
-| Page              | Screenshot                                                                           |
-| ----------------- | ------------------------------------------------------------------------------------ |
-| Homepage          | [View](docs/screenshots/home.png)                                                    |
-| Authentication    | [View](docs/screenshots/login.png)                                                   |
-| Blogs             | [View](docs/screenshots/blogs.png)                                                   |
-| Blog Details      | [View](docs/screenshots/blog-details.png)                                            |
-| Communities       | [View](docs/screenshots/communities.png)                                             |
-| Community Details | [View](docs/screenshots/community-details.png)                                       |
-| Profile           | Real account capture pending; see [capture instructions](docs/screenshots/README.md) |
+| Page              | Screenshot                                     |
+| ----------------- | ---------------------------------------------- |
+| Homepage          | [View](docs/screenshots/home.png)              |
+| Authentication    | [View](docs/screenshots/login.png)             |
+| Blogs             | [View](docs/screenshots/blogs.png)             |
+| Blog Details      | [View](docs/screenshots/blog-details.png)      |
+| Communities       | [View](docs/screenshots/communities.png)       |
+| Community Details | [View](docs/screenshots/community-details.png) |
+| Profile           | [View](docs/screenshots/profile.png)           |
 
-Public screenshots use the running application and Atlas content at a consistent 1440 × 1000 desktop viewport. Authenticated integration-test images are separate from portfolio screenshots. A [demo script](docs/DEMO_SCRIPT.md) is included.
+Public screenshots use the running application and Atlas content at a consistent 1440 × 1000 desktop viewport. The Profile image is the owner's 1366 × 768 desktop capture of a real GitHub sign-in, with the email redacted. Authenticated integration-test images are separate from portfolio screenshots. A [demo script](docs/DEMO_SCRIPT.md) is included.
 
 ## Features
 

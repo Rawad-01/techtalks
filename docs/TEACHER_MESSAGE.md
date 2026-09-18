@@ -1,6 +1,6 @@
 # Teacher submission message
 
-Complete the remaining checks in [SUBMISSION_CHECKLIST.md](../SUBMISSION_CHECKLIST.md), including the real Profile screenshot or a demo video, before sending. Replace the name below with your own. This draft has not been sent.
+All seven screenshots, including the real Profile capture, are included. Complete the remaining production workflow checks in [SUBMISSION_CHECKLIST.md](../SUBMISSION_CHECKLIST.md) before sending. Replace the name below with your own. This draft has not been sent.
 
 Subject: TechTalks capstone project submission
 

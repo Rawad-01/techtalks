@@ -18,7 +18,7 @@ Public deployment checks were performed on September 14, 2026, with the OAuth re
 | Local Atlas read verification             | Connected; 5 users, 8 blog records, 6 communities at verification time      |
 | Existing real OAuth identities in Atlas   | 1 Google identity; no GitHub identity yet                                   |
 | Public submission screenshots             | 6 real application captures at a 1440 × 1000 desktop viewport               |
-| Authenticated submission screenshot       | Pending real account capture                                                |
+| Authenticated submission screenshot       | Owner-provided GitHub Profile capture; email redacted and image reviewed    |
 | Hosted deployment                         | Public pages and Atlas reads verified at https://techtalks-sigma.vercel.app |
 
 Record counts are observations from September 14, not fixed UI counts. The owner confirmed production Google sign-in and then successful GitHub sign-in on September 19 after the account-conflict redirect was fixed. The agent has not signed into either provider in production.
@@ -72,7 +72,6 @@ Real secrets remain outside tracked source. Credentials previously shared in cha
 
 - The GitHub repository, screenshots folder, and live website each returned HTTP 200 to anonymous visitors. The repository is publicly accessible; the prepared commit and subsequent submission documentation were pushed to the remote.
 - Verify authenticated persistence on the deployed site: profile editing, publishing, community membership, and logout.
-- A Profile screenshot from a real sign-in, with private information kept out of the capture.
 - Final links, screenshots, and optional recorded demo reviewed before submission.
 
 Follow [DEPLOYMENT.md](docs/DEPLOYMENT.md), [MANUAL_TESTING.md](docs/MANUAL_TESTING.md), and [SUBMISSION_CHECKLIST.md](SUBMISSION_CHECKLIST.md). Machine-readable test/audit reports and diagnostics remain in ignored `.artifacts/`.
@@ -87,5 +86,6 @@ At https://techtalks-sigma.vercel.app on September 14, 2026:
 - A fresh anonymous Chrome context followed the Profile page's streamed redirect to Login. Next.js can return HTTP 200 while delivering this redirect in the page stream.
 - The first check found enabled login buttons with localhost callback URLs. After configuration and redeployment, `/api/auth/providers` was rechecked and now advertises `https://techtalks-sigma.vercel.app/api/auth/callback/google` and `https://techtalks-sigma.vercel.app/api/auth/callback/github`.
 - The owner reported successful Google sign-in after production setup and successful GitHub sign-in after the September 19 redirect fix. These are manual owner confirmations, not agent-executed OAuth tests.
+- The owner supplied a real desktop screenshot of the deployed Profile with GitHub listed as the connected provider. After the owner redacted the email, the image was visually reviewed and saved as `docs/screenshots/profile.png`. It is a 1366 × 768 manual desktop capture, separate from the six automated public screenshots.
 
 The agent's checks did not log into an account or change production records. Authenticated production writes and testing on another physical device still need owner verification.
