@@ -11,7 +11,7 @@ Checked items have evidence described in [VERIFICATION.md](VERIFICATION.md). Aut
 - [x] Community details work
 - [x] Login page and app session handling work
 - [x] Google OAuth works on the final deployment (owner-reported successful sign-in)
-- [ ] GitHub OAuth independently verified on the final deployment
+- [x] GitHub OAuth works on the final deployment (owner-reported successful sign-in)
 - [x] Profile is protected
 - [x] Profile editing works
 - [x] Blog creation works
@@ -19,7 +19,7 @@ Checked items have evidence described in [VERIFICATION.md](VERIFICATION.md). Aut
 - [x] Leave community works
 - [x] Logout revokes the browser session and restores protection
 
-The owner reported successful sign-in after following the deployed Google login test. Both provider buttons are configured, and both callback URLs use the production origin. GitHub sign-in still needs a separate test, using a different email if the Google account already uses the same email.
+The owner reported successful production sign-in with both Google and GitHub. Both provider buttons are configured, and both callback URLs use the production origin. An email already registered through another provider must use its original provider; accounts are not automatically linked by email.
 
 ## Database
 
@@ -53,10 +53,10 @@ The owner reported successful sign-in after following the deployed Google login 
 ## Deployment
 
 - [x] Application deployed
-- [ ] Production environment variables configured
+- [x] Production environment variables configured (public data and both sign-in providers work)
 - [x] MongoDB production connection works
 - [x] Google OAuth production origin/callback configured (correct callback observed; owner confirms login)
-- [ ] GitHub OAuth production callback configured
+- [x] GitHub OAuth production callback configured (correct callback observed; owner confirms login)
 - [ ] Live URL tested in a private browser and on another device
 - [ ] Profile edit, article publish, join/leave, and logout verified on the live site
 

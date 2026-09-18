@@ -1,6 +1,6 @@
 # Submission verification
 
-Verified locally and on the hosted public deployment on September 14, 2026. This report distinguishes local authenticated tests, production public checks, and owner-reported production Google sign-in. GitHub sign-in and authenticated production write flows remain unverified.
+Public deployment checks were performed on September 14, 2026, with the OAuth redirect fix rechecked on September 19. This report distinguishes local authenticated tests, production public checks, and owner-reported production Google and GitHub sign-in. Authenticated production write flows remain unverified.
 
 ## Completed checks
 
@@ -21,7 +21,7 @@ Verified locally and on the hosted public deployment on September 14, 2026. This
 | Authenticated submission screenshot       | Pending real account capture                                                |
 | Hosted deployment                         | Public pages and Atlas reads verified at https://techtalks-sigma.vercel.app |
 
-Record counts are a dated observation, not fixed UI counts. The owner first confirmed local sign-in and later reported success after following the production Google sign-in test. The agent has not signed into either provider in production.
+Record counts are observations from September 14, not fixed UI counts. The owner confirmed production Google sign-in and then successful GitHub sign-in on September 19 after the account-conflict redirect was fixed. The agent has not signed into either provider in production.
 
 ## Audit coverage
 
@@ -60,7 +60,7 @@ Authenticated automated tests use signed Auth.js cookies created only by the tes
 
 The internal `/login?error=OAuthAccountNotLinked` destination was incorrectly processed as a post-login callback and replaced with `/profile`. A logged-out browser then returned to Login without the error. The Auth.js redirect callback now preserves this one internal failure destination while user-supplied login callbacks remain restricted. Existing protections against linking accounts solely by email are unchanged.
 
-Lint, TypeScript, the production build, 7 unit tests, and all 10 isolated integration groups passed after the fix. Regression coverage checks both redirect safety and the visible error in the rendered Login page. These tests do not authorize a real GitHub account; a full hosted GitHub sign-in remains a manual check.
+Lint, TypeScript, the production build, 7 unit tests, and all 10 isolated integration groups passed after the fix. Regression coverage checks both redirect safety and the visible error in the rendered Login page. Vercel reported successful deployment of commit `3ca3f92`; an anonymous browser reached GitHub's sign-in page with the correct callback. The owner subsequently confirmed successful GitHub login. Automated tests did not authorize a real GitHub account.
 
 ## Git and credential scope
 
@@ -72,7 +72,6 @@ Real secrets remain outside tracked source. Credentials previously shared in cha
 
 - The GitHub repository, screenshots folder, and live website each returned HTTP 200 to anonymous visitors. The repository is publicly accessible; the prepared commit and subsequent submission documentation were pushed to the remote.
 - Verify authenticated persistence on the deployed site: profile editing, publishing, community membership, and logout.
-- Test GitHub sign-in on the deployed origin; use a separate email if the Google identity already uses the same email because cross-provider linking is intentionally disabled.
 - A Profile screenshot from a real sign-in, with private information kept out of the capture.
 - Final links, screenshots, and optional recorded demo reviewed before submission.
 
@@ -87,6 +86,6 @@ At https://techtalks-sigma.vercel.app on September 14, 2026:
 - The anonymous session endpoint returned `null`; the private profile API returned HTTP 401.
 - A fresh anonymous Chrome context followed the Profile page's streamed redirect to Login. Next.js can return HTTP 200 while delivering this redirect in the page stream.
 - The first check found enabled login buttons with localhost callback URLs. After configuration and redeployment, `/api/auth/providers` was rechecked and now advertises `https://techtalks-sigma.vercel.app/api/auth/callback/google` and `https://techtalks-sigma.vercel.app/api/auth/callback/github`.
-- The owner reported successful Google sign-in after the production setup instructions. This is manual owner confirmation, not an agent-executed OAuth test. GitHub's reported callback URL alone does not establish that its external OAuth app accepts the redirect or that its secret is valid.
+- The owner reported successful Google sign-in after production setup and successful GitHub sign-in after the September 19 redirect fix. These are manual owner confirmations, not agent-executed OAuth tests.
 
-The agent's checks did not log into an account or change production records. Authenticated production writes, a GitHub OAuth round trip, and testing on another physical device still need owner verification.
+The agent's checks did not log into an account or change production records. Authenticated production writes and testing on another physical device still need owner verification.
